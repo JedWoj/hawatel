@@ -5,7 +5,7 @@ import UserList from '../components/User/UsersList';
 describe('UserList tests', () => {
     it('UserList renders "Adam"', () => {
         render(<UserList users={[{name:'Adam', email: 'test@test.com', gender: 'male', status: 'active', id: 2}]} />);
-        const user = screen.getByText('Adam');
+        const user = screen.getByText('Adam', {exact: false});
         expect(user).toBeInTheDocument();
     })
 })

@@ -5,7 +5,7 @@ import User from '../components/User/User';
 describe('User component tests', () => {
     it('User renders Adam', () => {
         render(<User user={{name:'Adam', email: 'test@test.com', gender: 'male', status: 'active', id: 2}} />);
-        const user = screen.getByText('Adam');
+        const user = screen.getByText('Adam', {exact: false});
         expect(user).toBeInTheDocument();
     })
 })
