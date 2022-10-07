@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async () => {
     try {
         const response = await fetch('https://gorest.co.in/public/v1/users');
         if(!response.ok) throw new Error();
-        const users = await response.json();
+        const users: UsersType = await response.json();
         return {
           props: { users },
           revalidate: 120
