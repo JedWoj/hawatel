@@ -28,8 +28,6 @@ const UserPage = ({users, error}: UserPageType) => {
     const loadUsers = (type: string) => {
         type === '+' ? dispatch(userSlice.actions.setActivePage(activePage + 1)) : dispatch(userSlice.actions.setActivePage(activePage - 1));
     } 
-    
-    console.log(users);
 
     return(
         <>
