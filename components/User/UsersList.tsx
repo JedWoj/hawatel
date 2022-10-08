@@ -2,11 +2,12 @@ import User from "./User";
 import { SingleUserType } from "../../types/UserType";
 
 interface UsersListType {
-    users: SingleUserType[];
+    users: SingleUserType[] | undefined;
 }
 
 const UsersList = ({users}: UsersListType) => {
     const renderUsers = () => {
+        if(users === undefined) return
         return users.map(user => <User key={user.id} user={user} />);
     }
     

@@ -1,17 +1,15 @@
-export type SingleUserType = {
+export type SinglePostType = {
+    body: string,
+    email: string,
     id: number,
     name: string,
-    email: string,
-    gender: string,
-    status: string,
 }
 
-export type UsersType = {
-    data: SingleUserType[],
+export type PostsType = {
+    data: SinglePostType[],
     meta: {
         pagination: {
-            limit: number,
-            page: number,
+            page: number, 
             pages: number,
             total: number,
             links: {
