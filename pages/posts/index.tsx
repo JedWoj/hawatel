@@ -16,27 +16,25 @@ interface PostsPageType {
 
 const PostsPage = ({posts, comments}: PostsPageType) => {
     const dispatch = useAppDispatch();
-    const activePage = useAppSelector((state) => state.post.activePage);
+    const activePostPage = useAppSelector((state) => state.post.activePostPage);
     const fetchedPosts = useAppSelector((state) => state.post.posts);
     const fetchedComments = useAppSelector((state) => state.post.posts);
-    console.log(posts);
-    console.log(fetchedPosts)
 
     useEffect(()=> {
-        // if(activePage === 1) return;
-        dispatch(fetchPosts(activePage));
-    },[dispatch, activePage]);
+        if(activePostPage === 1) return;
+        dispatch(fetchPosts(activePostPage));
+    },[dispatch, activePostPage]);
 
     const loadPosts = (type: string) => {
-        type === '+' ? dispatch(postSlice.actions.setActivePage(activePage + 1)) : dispatch(postSlice.actions.setActivePage(activePage - 1));
+        type === '+' ? dispatch(postSlice.actions.setActivePostPage(activePostPage + 1)) : dispatch(postSlice.actions.setActivePostPage(activePostPage - 1));
     } 
 
     return(
         <div>
-            <PostList comments={activePage === 1 ? comments : fetchedComments} posts={activePage === 1 ? posts : fetchedPosts}/>
+            <PostList comments={activePostPage === 1 ? comments : fetchedComments} posts={activePostPage === 1 ? posts : fetchedPosts}/>
             <div className="flex justify-between px-4">
-                {activePage > 1 && <Button text="Load Previous" btnFunction={loadPosts.bind(null, '-')} />} 
-                {activePage < posts.meta.pagination.pages && <Button text="Load next" btnFunction={loadPosts.bind(null, '+')}/>}
+                {activePostPage > 1 && <Button text="Load Previous" btnFunction={loadPosts.bind(null, '-')} />} 
+                {activePostPage < posts.meta.pagination.pages && <Button text="Load next" btnFunction={loadPosts.bind(null, '+')}/>}
             </div>
         </div>
     )

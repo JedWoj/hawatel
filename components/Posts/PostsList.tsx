@@ -3,11 +3,12 @@ import { CommentsType } from '../../types/CommentType';
 import { PostsType } from '../../types/PostType';
 
 interface PostsListType {
-    posts: PostsType,
+    posts: PostsType | undefined,
     comments: CommentsType,
 }
 
 const PostsList = ({posts,comments}: PostsListType) => {
+    if(posts?.data === undefined) return <div className="text-center">Loading!</div>;
     const postsWithComments = posts.data.map(post => {
         const matchingComments = comments.data.filter(comment => comment.post_id === post.id);
         return {

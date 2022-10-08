@@ -4,7 +4,7 @@ import { fetchPosts } from '../async/fetch-posts';
 const postSlice = createSlice({
     name: "user",
     initialState: {
-        activePage: 1,  
+        activePostPage: 1,  
         posts: {} as any,
         comments: {} as any,
     },
@@ -23,8 +23,8 @@ const postSlice = createSlice({
         })
     },
     reducers: {
-        setActivePage(state, action: PayloadAction<number>) {
-            state.activePage = action.payload;
+        setActivePostPage(state, action: PayloadAction<number>) {
+            state.activePostPage = action.payload;
         }
     }
 });
