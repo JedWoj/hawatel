@@ -21,7 +21,7 @@ const PostsList = ({posts,comments}: PostsListType) => {
     }
     
     return(
-        <div>
+        <div className="mx-auto max-w-6xl">
             {renderPosts()}
         </div>
     )

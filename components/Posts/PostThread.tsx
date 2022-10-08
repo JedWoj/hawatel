@@ -11,16 +11,18 @@ interface PostType {
 
 const PostThread = ({post, comments}: PostType) => {
     const renderComments = () => {
-        return comments.map(com => <PostComment key={com.id} />)
+        return comments.map(comment => <PostComment comment={comment} key={comment.id} />);
     }
     
     return(
-        <Card>
-            <Post post={post} />
-            <div>
-                {renderComments()}
-            </div>
-        </Card>
+        <div className="border-b-4 py-4">
+            <Card>
+                <Post post={post} />
+                <div>
+                    {renderComments()}
+                </div>
+            </Card>
+        </div>
     )
 }
 
