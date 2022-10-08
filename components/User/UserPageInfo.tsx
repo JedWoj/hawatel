@@ -6,7 +6,7 @@ interface UserPageInfoType {
 
 const UserPageInfo = ({activePage, totalPages, totalUsers}: UserPageInfoType) => {
     return(
-        <div className="flex p-4 pt-0 justify-around">
+        <div className="flex p-4 pt-0 justify-around font-semibold">
             <p>
                 Page: {activePage}/{totalPages}
             </p>

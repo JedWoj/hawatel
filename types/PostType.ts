@@ -1,8 +1,8 @@
 export type SinglePostType = {
     body: string,
-    email: string,
     id: number,
-    name: string,
+    user_id: number,
+    title: string,
 }
 
 export type PostsType = {

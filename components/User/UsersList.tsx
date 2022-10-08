@@ -7,7 +7,7 @@ interface UsersListType {
 
 const UsersList = ({users}: UsersListType) => {
     const renderUsers = () => {
-        if(users === undefined) return
+        if(users === undefined) return <div>Something Went Wrong!</div>
         return users.map(user => <User key={user.id} user={user} />);
     }
     
