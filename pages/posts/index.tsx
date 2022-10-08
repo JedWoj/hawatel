@@ -10,21 +10,24 @@ import Button from '../../components/UI/Button';
 import postSlice from "../../store/slices/postsSlice";
 
 interface PostsPageType {
-    posts: PostsType,
-    comments: CommentsType,
+    posts?: PostsType,
+    comments?: CommentsType,
+    error?: string, 
 }
 
-const PostsPage = ({posts, comments}: PostsPageType) => {
+const PostsPage = ({posts, comments, error}: PostsPageType) => {
     const dispatch = useAppDispatch();
     const activePostPage = useAppSelector((state) => state.post.activePostPage);
     const fetchedPosts = useAppSelector((state) => state.post.posts);
-    const fetchedComments = useAppSelector((state) => state.post.posts);
-
+    const fetchedComments = useAppSelector((state) => state.post.comments);
+    
     useEffect(()=> {
         if(activePostPage === 1) return;
         dispatch(fetchPosts(activePostPage));
     },[dispatch, activePostPage]);
-
+    
+    if(posts === undefined) return <div>{error}</div>;
+    
     const loadPosts = (type: string) => {
         type === '+' ? dispatch(postSlice.actions.setActivePostPage(activePostPage + 1)) : dispatch(postSlice.actions.setActivePostPage(activePostPage - 1));
     } 
@@ -46,6 +49,7 @@ export const getStaticProps: GetStaticProps = async () => {
             getFormattedPromise('https://gorest.co.in/public/v1/posts'),
             getFormattedPromise('https://gorest.co.in/public/v1/comments'),
         ]);
+        if(!posts.data || !comments.data) throw new Error();
         return {
           props: { posts, comments },
           revalidate: 120
