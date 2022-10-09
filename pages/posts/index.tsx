@@ -21,11 +21,13 @@ const PostsPage = ({posts, comments, error}: PostsPageType) => {
     const fetchedPosts = useAppSelector((state) => state.post.posts);
     const fetchedComments = useAppSelector((state) => state.post.comments);
     
+    //fetching posts and comments from api if the page isnt prerendered
     useEffect(()=> {
         if(activePostPage === 1) return;
         dispatch(fetchPosts(activePostPage));
     },[dispatch, activePostPage]);
     
+    //validation if data is correct
     if(posts === undefined) return <div>{error}</div>;
     
     const loadPosts = (type: string) => {
