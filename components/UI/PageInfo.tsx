@@ -1,12 +1,12 @@
-interface UserPageInfoType {
+interface PageInfoType {
     activePage: number,
     totalPages: number,
     totalUsers: number,
 }
 
-const UserPageInfo = ({activePage, totalPages, totalUsers}: UserPageInfoType) => {
+const PageInfo = ({activePage,totalPages,totalUsers}: PageInfoType) => {
     return(
-        <div className="flex p-4 pt-0 justify-around font-semibold">
+        <div className="flex p-4 mt-3 pt-0 justify-around font-semibold">
             <p>
                 Page: {activePage}/{totalPages}
             </p>
@@ -17,4 +17,4 @@ const UserPageInfo = ({activePage, totalPages, totalUsers}: UserPageInfoType) =>
     )
 }
 
-export default UserPageInfo;
+export default PageInfo;

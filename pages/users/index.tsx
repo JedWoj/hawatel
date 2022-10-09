@@ -6,7 +6,7 @@ import { useAppDispatch,useAppSelector } from '../../hooks';
 import { fetchUsers } from "../../store/async/fetch-users";
 import userSlice from '../../store/slices/userSlice';
 import Button from "../../components/UI/Button";
-import UserPageInfo from '../../components/User/UserPageInfo';
+import PageInfo from '../../components/UI/PageInfo';
 
 interface UserPageType {
     users?: UsersType;
@@ -33,7 +33,7 @@ const UserPage = ({users, error}: UserPageType) => {
         <>
             {users && <section>
                 <UserList users={activePage === 1 ? users.data : fetchedUsers?.users?.data} />
-                <UserPageInfo activePage={activePage} totalPages={users.meta.pagination.pages} totalUsers={users.meta.pagination.total} />
+                <PageInfo activePage={activePage} totalPages={users.meta.pagination.pages} totalUsers={users.meta.pagination.total} />
                 <div className="flex justify-between px-4">
                     {activePage > 1 && <Button text="Load Previous" btnFunction={loadUsers.bind(null, '-')} />} 
                     {activePage < users.meta.pagination.pages && <Button text="Load next" btnFunction={loadUsers.bind(null, '+')}/>}

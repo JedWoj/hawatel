@@ -5,8 +5,8 @@ const postSlice = createSlice({
     name: "user",
     initialState: {
         activePostPage: 1,  
-        posts: {} as any,
-        comments: {} as any,
+        posts: {},
+        comments: {},
     },
     extraReducers: (builder) => {
         builder.addCase(fetchPosts.pending, (state) => {

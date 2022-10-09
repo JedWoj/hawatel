@@ -8,6 +8,7 @@ import PostList from '../../components/Posts/PostsList';
 import { fetchPosts } from '../../store/async/fetch-posts';
 import Button from '../../components/UI/Button';
 import postSlice from "../../store/slices/postsSlice";
+import PageInfo from '../../components/UI/PageInfo';
 
 interface PostsPageType {
     posts?: PostsType,
@@ -18,10 +19,10 @@ interface PostsPageType {
 const PostsPage = ({posts, comments, error}: PostsPageType) => {
     const dispatch = useAppDispatch();
     const activePostPage = useAppSelector((state) => state.post.activePostPage);
-    const fetchedPosts = useAppSelector((state) => state.post.posts);
-    const fetchedComments = useAppSelector((state) => state.post.comments);
+    const fetchedPosts = useAppSelector((state) => state.post.posts) as PostsType;
+    const fetchedComments = useAppSelector((state) => state.post.comments) as CommentsType;
     
-    //fetching posts and comments from api if the page isnt prerendered
+    //fetching posts and comments from api if the page isnt
     useEffect(()=> {
         if(activePostPage === 1) return;
         dispatch(fetchPosts(activePostPage));
@@ -37,6 +38,7 @@ const PostsPage = ({posts, comments, error}: PostsPageType) => {
     return(
         <div>
             <PostList comments={activePostPage === 1 ? comments : fetchedComments} posts={activePostPage === 1 ? posts : fetchedPosts}/>
+            <PageInfo activePage={activePostPage} totalPages={posts!.meta.pagination.pages} totalUsers={posts!.meta.pagination.total} />
             <div className="flex justify-between px-4">
                 {activePostPage > 1 && <Button text="Load Previous" btnFunction={loadPosts.bind(null, '-')} />} 
                 {activePostPage < posts.meta.pagination.pages && <Button text="Load next" btnFunction={loadPosts.bind(null, '+')}/>}
