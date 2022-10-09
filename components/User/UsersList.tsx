@@ -2,10 +2,11 @@ import User from "./User";
 import { SingleUserType } from "../../types/UserType";
 
 interface UsersListType {
-    users: SingleUserType[] | undefined;
+    users?: SingleUserType[];
 }
 
 const UsersList = ({users}: UsersListType) => {
+    //function takes user and for evry user in list returns user component
     const renderUsers = () => {
         if(users === undefined) return <div>Something Went Wrong!</div>
         return users.map(user => <User key={user.id} user={user} />);

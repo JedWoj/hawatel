@@ -15,6 +15,7 @@ interface TodosPageProps {
 
 const TodosPage = ({todos, error}: TodosPageProps) => {
     const dispatch = useAppDispatch();
+    //as TodoType used for IDE intellisense
     const fetchedTodos = useAppSelector((state) => state.todo.todos) as TodosType;
     const activeTodoPage = useAppSelector((state) => state.todo.activeTodosPage);
     
@@ -42,6 +43,7 @@ const TodosPage = ({todos, error}: TodosPageProps) => {
     )
 }
 
+//getStaticProps return prerendered todos or info about error
 export const getStaticProps: GetStaticProps = async () => {
     try {
         const response = await fetch('https://gorest.co.in/public/v1/todos');

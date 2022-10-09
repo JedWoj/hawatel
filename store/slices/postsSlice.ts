@@ -10,16 +10,14 @@ const postSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchPosts.pending, (state) => {
-            state.comments = state.comments;
-            state.posts = state.posts;
+            //TODO: show user info about downloading
         })
         builder.addCase(fetchPosts.fulfilled, (state, action) => {
             state.comments = action.payload.comments;
             state.posts = action.payload.posts;
         })
         builder.addCase(fetchPosts.rejected, (state) => {
-            state.comments = state.comments;
-            state.posts = state.posts;
+            //TODO: show user that fetching failed
         })
     },
     reducers: {

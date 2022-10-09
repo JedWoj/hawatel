@@ -9,6 +9,7 @@ interface PostsListType {
 
 const PostsList = ({posts,comments}: PostsListType) => {
     if(posts?.data === undefined) return <div className="text-center">Loading!</div>;
+    //postsWithCommentss takes posts, filters them and creates array of objects with comments and post with the same ID
     const postsWithComments = posts.data.map(post => {
         const matchingComments = comments!.data.filter(comment => comment.post_id === post.id);
         return {

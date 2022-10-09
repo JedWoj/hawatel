@@ -9,13 +9,13 @@ const todoSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchTodos.pending, (state) => {
-            
+            //TODO: show user info about downloading
         })
         builder.addCase(fetchTodos.fulfilled, (state, action) => {
             state.todos = action.payload.todos;
         })
         builder.addCase(fetchTodos.rejected, (state) => {
-            
+            //TODO: show user that fetching failed
         })
     },
     reducers: {

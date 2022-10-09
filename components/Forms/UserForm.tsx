@@ -5,6 +5,7 @@ import Card from "../UI/Card";
 
 const UserForm = () => {
     const [radioValue, setRadioValue] = useState<string>('male');
+    //state responsible for showing user if data was sent successfully
     const [wasSent, setWasSent] = useState<boolean>(false);
     const [wasTryed, setWasTryed] = useState<boolean>(false);
 
@@ -12,6 +13,7 @@ const UserForm = () => {
         setRadioValue(e.target.value);
     };
 
+    //form validation and handling with formik
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -111,8 +113,8 @@ const UserForm = () => {
                 </form> 
                 
             </Card>
-                {wasSent && <Card><div className="text-center">User added Successfully</div></Card>}
-                {!wasSent && wasTryed && <Card><div className="text-center">Something went wrong</div></Card>}
+            {wasSent && <Card><div className="text-center">User added Successfully</div></Card>}
+            {!wasSent && wasTryed && <Card><div className="text-center">Something went wrong</div></Card>}
         </div>
     )
 }

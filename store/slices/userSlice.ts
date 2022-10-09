@@ -9,13 +9,13 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUsers.pending, (state) => {
-            state.users = state.users;
+            //TODO: show user info about downloading
         })
         builder.addCase(fetchUsers.fulfilled, (state, action) => {
             state.users = action.payload;
         })
         builder.addCase(fetchUsers.rejected, (state) => {
-            state.users = state.users;
+            //TODO: show user info that fetching failed
         })
     },
     reducers: {

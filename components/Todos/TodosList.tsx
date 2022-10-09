@@ -8,6 +8,7 @@ interface TodosListProps {
 
 const TodosList = ({todos}: TodosListProps) => {
     if(todos === undefined) return <div>Something went wrong!</div>
+    //react-virtualized table for more details check official docs
     return(
             <div>
                 <div className={'w-[100%] h-[80vh] md:h-[75vh]'}>
