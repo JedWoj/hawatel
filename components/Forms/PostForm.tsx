@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Card from "../UI/Card";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import FormRequestStatusInfo from './FormRequestStatusInfo';
 
 const PostForm = () => {
     const [wasSent, setWasSent] = useState<boolean>(false);
@@ -49,7 +50,7 @@ const PostForm = () => {
     });
 
     return(
-        <div className="w-[80%] sm:w-[60%] md:w-[40%] lg:w-[33%] mx-auto mt-6">
+        <div className="w-[80%] sm:w-[60%] md:w-[40%] lg:w-[33%] mx-auto mt-6 pb-5">
             <h2 className="font-semibold text-xl my-2 text-center">
                 Add new post!
             </h2>
@@ -107,8 +108,8 @@ const PostForm = () => {
                     </button>
                 </form>
             </Card>
-            {wasSent && <Card><div className="text-center">User added Successfully</div></Card>}
-            {!wasSent && wasTryed && <Card><div className="text-center">Something went wrong</div></Card>}
+            {wasSent && <FormRequestStatusInfo status='User Successfully Added!'/>}
+            {!wasSent && wasTryed && <FormRequestStatusInfo status='Something Went Wrong!'/>}
         </div>
     )
 }

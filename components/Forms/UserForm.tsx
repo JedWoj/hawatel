@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Card from "../UI/Card";
+import FormRequestStatusInfo from "./FormRequestStatusInfo";
 
 const UserForm = () => {
     const [radioValue, setRadioValue] = useState<string>('male');
@@ -116,8 +117,8 @@ const UserForm = () => {
                 </form> 
                 
             </Card>
-            {wasSent && <Card><div className="text-center">User added Successfully</div></Card>}
-            {!wasSent && wasTryed && <Card><div className="text-center">Something went wrong</div></Card>}
+            {wasSent && <FormRequestStatusInfo status="User Successfully Added"/>}
+            {!wasSent && wasTryed && <FormRequestStatusInfo status="Something Went Wrong!" />}
         </div>
     )
 }
