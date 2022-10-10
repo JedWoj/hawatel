@@ -54,6 +54,9 @@ const UserForm = () => {
     
     return(
         <div className="w-[80%] sm:w-[60%] md:w-[40%] lg:w-[33%] mx-auto">
+            <h2 className="font-semibold text-xl mb-2 text-center">
+                Add new user!
+            </h2>
             <Card>
                 <form className="flex flex-col gap-2" onSubmit={formik.handleSubmit}>
                     <label htmlFor="email">
