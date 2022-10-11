@@ -6,16 +6,18 @@ const todoSlice = createSlice({
     initialState: {
         activeTodosPage: 1,  
         todos: {},
+        todosRequestStatus: '',
     },
     extraReducers: (builder) => {
         builder.addCase(fetchTodos.pending, (state) => {
-            //TODO: show user info about downloading
+            state.todosRequestStatus = 'pending';
         })
         builder.addCase(fetchTodos.fulfilled, (state, action) => {
             state.todos = action.payload.todos;
+            state.todosRequestStatus = 'success';
         })
         builder.addCase(fetchTodos.rejected, (state) => {
-            //TODO: show user that fetching failed
+            state.todosRequestStatus = 'failed';
         })
     },
     reducers: {

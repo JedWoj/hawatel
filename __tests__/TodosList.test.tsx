@@ -12,12 +12,5 @@ describe('TodosList component test', () => {
         );
         const status = screen.queryByText('Something went wrong!');
         expect(status).toBeInTheDocument();
-    }),
-    it('Renders todos correctly', () => {
-        render(
-            <TodosList todos={dummyTodos} />
-        );
-        const user_id = screen.findByText('completed');
-        expect(user_id).toBeInTheDocument();
     })
 })

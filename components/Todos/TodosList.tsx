@@ -1,13 +1,15 @@
 import { SingleTodoType } from '../../types/TodosType';
 import 'react-virtualized/styles.css';
 import { Column, Table, AutoSizer } from 'react-virtualized';
+import FailedLoading from '../../components/UI/FailedLoading';
 
 interface TodosListProps {
-    todos: SingleTodoType[] | undefined,
+    todos?: SingleTodoType[];
 }
 
 const TodosList = ({todos}: TodosListProps) => {
-    if(todos === undefined) return <div>Something went wrong!</div>
+    //giving user info that data wasnt fetched correctly
+    if(todos === undefined) return <FailedLoading />;
     //react-virtualized table for more details check official docs
     return(
             <div>

@@ -9,6 +9,8 @@ import { fetchPosts } from '../../store/async/fetch-posts';
 import Button from '../../components/UI/Button';
 import postSlice from "../../store/slices/postsSlice";
 import PageInfo from '../../components/UI/PageInfo';
+import Spinner from '../../components/UI/Spinner';
+import FailedLoading from '../../components/UI/FailedLoading';
 
 interface PostsPageType {
     posts?: PostsType,
@@ -21,6 +23,7 @@ const PostsPage = ({posts, comments, error}: PostsPageType) => {
     const activePostPage = useAppSelector((state) => state.post.activePostPage);
     const fetchedPosts = useAppSelector((state) => state.post.posts) as PostsType;
     const fetchedComments = useAppSelector((state) => state.post.comments) as CommentsType;
+    const postsRequestStatus = useAppSelector((state) => state.post.postRequestStatus);
     
     //fetching posts and comments from api if the page isnt
     useEffect(()=> {
@@ -28,7 +31,13 @@ const PostsPage = ({posts, comments, error}: PostsPageType) => {
         dispatch(fetchPosts(activePostPage));
     },[dispatch, activePostPage]);
     
-    //validation if data is correct
+    //showing user loading status after each fetching
+    if(postsRequestStatus === 'pending') return <Spinner />;
+
+    //showing user that fetching failed
+    if(postsRequestStatus === 'failed') return <FailedLoading />;
+
+    //showing error if prerendered data isnt correct
     if(posts === undefined) return <div>{error}</div>;
     
     const loadPosts = (type: string) => {

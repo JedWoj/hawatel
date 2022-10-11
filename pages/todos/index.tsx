@@ -7,6 +7,8 @@ import { useAppDispatch,useAppSelector } from '../../hooks';
 import { fetchTodos } from '../../store/async/fetch-todos';
 import todoSlice from "../../store/slices/todoSlice";
 import PageInfo from "../../components/UI/PageInfo";
+import Spinner from '../../components/UI/Spinner';
+import FailedLoading from '../../components/UI/FailedLoading';
 
 interface TodosPageProps {
     todos?: TodosType,
@@ -18,6 +20,7 @@ const TodosPage = ({todos, error}: TodosPageProps) => {
     //as TodoType used for IDE intellisense
     const fetchedTodos = useAppSelector((state) => state.todo.todos) as TodosType;
     const activeTodoPage = useAppSelector((state) => state.todo.activeTodosPage);
+    const todosRequestStatus = useAppSelector((state) => state.todo.todosRequestStatus);
     
     //useEffect fetches new users if the data wasnt preRendered to avoid double downloading
     useEffect(()=> {
@@ -25,6 +28,13 @@ const TodosPage = ({todos, error}: TodosPageProps) => {
         dispatch(fetchTodos(`https://gorest.co.in/public/v1/todos?page=${activeTodoPage}`));
     },[dispatch, activeTodoPage]);
 
+    //showing user loading status after each fetching
+    if(todosRequestStatus === 'pending') return <Spinner />;
+
+    //showing user that fetching failed
+    if(todosRequestStatus === 'failed') return <FailedLoading />;
+
+    //checking if prerendered data was fetched correctly
     if(error) return <div>{error}</div>
 
     const loadTodos = (type: string) => {

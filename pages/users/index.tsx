@@ -7,6 +7,8 @@ import { fetchUsers } from "../../store/async/fetch-users";
 import userSlice from '../../store/slices/userSlice';
 import Button from "../../components/UI/Button";
 import PageInfo from '../../components/UI/PageInfo';
+import Spinner from '../../components/UI/Spinner';
+import FailedLoading from '../../components/UI/FailedLoading';
 
 interface UserPageType {
     users?: UsersType;
@@ -17,6 +19,7 @@ const UserPage = ({users, error}: UserPageType) => {
     const dispatch = useAppDispatch();
     const fetchedUsers = useAppSelector((state) => state.user.users) as {users: UsersType};
     const activePage = useAppSelector((state) => state.user.activePage);
+    const userRequestStatus = useAppSelector((state) => state.user.userRequestStatus);
     
     //useEffect fetches new users if the data wasnt preRendered to avoid double downloading
     useEffect(()=> {
@@ -24,6 +27,12 @@ const UserPage = ({users, error}: UserPageType) => {
         dispatch(fetchUsers(`https://gorest.co.in/public/v1/users?page=${activePage}`));
     },[dispatch, activePage]);
 
+    //showing user loading status after each fetching
+    if(userRequestStatus === 'pending') return <Spinner />;
+
+    //showing user that fetching failed
+    if(userRequestStatus === 'failed') return <FailedLoading />;
+ 
     //loadUsers set increments or decrements activePage locatded in Redux store depending on provided type, type MUST be "+" if you want to increment avtivePage
     const loadUsers = (type: string) => {
         type === '+' ? dispatch(userSlice.actions.setActivePage(activePage + 1)) : dispatch(userSlice.actions.setActivePage(activePage - 1));

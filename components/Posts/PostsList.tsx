@@ -3,8 +3,8 @@ import { CommentsType } from '../../types/CommentType';
 import { PostsType } from '../../types/PostType';
 
 interface PostsListType {
-    posts: PostsType | undefined,
-    comments: CommentsType | undefined,
+    posts?: PostsType,
+    comments?: CommentsType,
 }
 
 const PostsList = ({posts,comments}: PostsListType) => {

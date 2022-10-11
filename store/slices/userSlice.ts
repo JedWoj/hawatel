@@ -6,16 +6,18 @@ const userSlice = createSlice({
     initialState: {
         activePage: 1,  
         users: {},
+        userRequestStatus: '',
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUsers.pending, (state) => {
-            //TODO: show user info about downloading
+            state.userRequestStatus = 'pending';
         })
         builder.addCase(fetchUsers.fulfilled, (state, action) => {
             state.users = action.payload;
+            state.userRequestStatus = 'success';
         })
         builder.addCase(fetchUsers.rejected, (state) => {
-            //TODO: show user info that fetching failed
+            state.userRequestStatus = 'failed';
         })
     },
     reducers: {
