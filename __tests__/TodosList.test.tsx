@@ -10,7 +10,7 @@ describe('TodosList component test', () => {
         render(
             <TodosList todos={undefined} />
         );
-        const status = screen.queryByText('Something went wrong!');
+        const status = screen.queryByText('Something went wrong!', {exact: false});
         expect(status).toBeInTheDocument();
     })
 })
